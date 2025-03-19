@@ -61,7 +61,8 @@ constraint fk_idEmpresa foreign key (idEmpresa) references empresa(idEmpresa)
 create table proveedor(
 idProveedor int constraint pk_idProveedor primary key,
 nombrePro nvarchar(100) not null,
-ruc char(15)
+ruc char(15),
+idEmpresa int constraint fk_empresaProveedor foreign key references empresa(idEmpresa) not null
 );
 
 create table emailEmpresa(
@@ -155,11 +156,35 @@ idProveedor int not null,
 constraint fk_CompanyProveedor foreign key (idCompany) references companiaTelefonica (idCom),
 constraint fk_ProveedorTel foreign key (idProveedor) references proveedor (idProveedor)
 )
+
+create table categoria(
+idCategoria int identity(1,1),
+categoria nvarchar(150) not null,
+descripcionCat nvarchar(350)
+)
+
+create table producto(
+idProducto int identity(1,1) constraint pk_Producto primary key,
+codigoProducto char(12) unique not null,
+nombreP nvarchar(80) not null,
+descripcion nvarchar(500) not null,
+stock int not null, --Crear un trigger el cual me calcule el total de ese producto que hay en existencia sin que el usuario pueda manejar el  inventario-->New table  name Inventario.
+idProveedor int constraint fk_productoProveedor foreign key references proveedor(idProveedor) not null,
+idCategoria int,
+constraint pk_productoCategoria foreign key(idCategoria) references categoria(idCategoria)
+)
+
+create table compra
+(
+idCompra int constraint pk_compra primary key,
+
+);
+--Continuar con la logica de la Bodega acá.
  create table bodega(
- idBodega int identity(1,1) primary key,
+ idBodega int constraint pk_Bodega primary key,
  nombreBodega nvarchar(100) not null,
- descripcionbd nvarchar(50) not null,
- idmun int not null,
+ descripcion nvarchar(50) not null,
+ idmun int not null,--??? What´s this??? 
  telefono char(30) not null check  (telefono like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
  constraint fk_bodega_municipio foreign key (idmun) references municipio(idmun)
  );

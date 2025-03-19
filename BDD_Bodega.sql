@@ -174,11 +174,33 @@ idCategoria int,
 constraint pk_productoCategoria foreign key(idCategoria) references categoria(idCategoria)
 )
 
-create table compra
-(
-idCompra int constraint pk_compra primary key,
-
+-- Tabla compra
+create table compra(
+    idCompra int identity(1,1) constraint pk_compra primary key,
+    fechaCompra datetime not null,
+    totalCompra decimal(18,2) not null
 );
+
+-- Tabla detalleCompra (para detalles de los productos comprados en una compra)
+create table detalleCompra(
+    idDetalleCompra int identity(1,1) primary key,
+    idCompra int,
+    idProducto int,
+    cantidad int not null,
+    precioUnitario decimal(18,2) not null,
+    constraint fk_detalleCompraCompra foreign key(idCompra) references compra(idCompra),
+    constraint fk_detalleCompraProducto foreign key(idProducto) references producto(idProducto)
+);
+
+-- Tabla recibo (para registrar los recibos de las compras)
+create table recibo(
+    idRecibo int identity(1,1) primary key,
+    idCompra int,
+    fechaRecibo datetime not null,
+    total decimal(18,2) not null,
+    constraint fk_reciboCompra foreign key(idCompra) references compra(idCompra)
+);
+
 --Continuar con la logica de la Bodega acá.
  create table bodega(
  idBodega int constraint pk_Bodega primary key,
@@ -189,5 +211,15 @@ idCompra int constraint pk_compra primary key,
  constraint fk_bodega_municipio foreign key (idmun) references municipio(idmun)
  );
  go
+
+/*Crear otras tablas que maneje los siguientes puntos
+-------------------------------
+-->Condiciones de la Compra:<--
+-------------------------------
+
+->Política de devolución: [Indicar condiciones, si aplica]
+->Garantía: [Información de la garantía del producto, si aplica]
+->Entrega: [Método y plazo de entrega, si aplica]
+*/
 
 

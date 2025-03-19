@@ -13,12 +13,16 @@ idDep int constraint pk_Dep primary key,
 nombreDep nvarchar(50)not null
 );
 
+go
+
 create table municipio
 (
 idMun int constraint pk_Mun primary key,
 nombreMun nvarchar(50) not null,
 idDep int constraint fk_Dep foreign key references departamento(idDep) not null
 );
+
+go
 
 create table barrio
 (
@@ -67,13 +71,13 @@ idEmpresa int constraint fk_empresaEmail foreign key references empresa(idEmpres
 )
 
 create table emailEmpleado(
-idEmail int constraint pk_Email primary key,
+idEmail int constraint pk_EmailEmple primary key,
 Email nvarchar(100),
 idEmpleado int constraint fk_empleadoEmail foreign key references empleado(idEmpleado)
 )
 
 create table emailProveedor(
-idEmail int constraint pk_Email primary key,
+idEmail int constraint pk_EmailProveedor primary key,
 Email nvarchar(100),
 idProveedor int constraint fk_proveedorEmail foreign key references proveedor(idProveedor)
 )
@@ -88,29 +92,28 @@ idCliente int constraint fk_ClienteDir foreign key references cliente(idCliente)
 
 create table direccionEmpresa
 (
-idDir int constraint pk_Dir primary key,
+idDir int constraint pk_DirEmpre primary key,
 Direccion nvarchar(50) not null,
-idBarrio int constraint fk_Barrio foreign key references barrio(idBarrio) not null,
+idBarrio int constraint fk_BarrioEmpre foreign key references barrio(idBarrio) not null,
 idEmpresa int constraint fk_EmpresaDir foreign key references empresa(idEmpresa) not null
 );
 
 create table direccionEmpleado
 (
-idDir int constraint pk_Dir primary key,
+idDir int constraint pk_DirEmple primary key,
 Direccion nvarchar(50) not null,
-idBarrio int constraint fk_Barrio foreign key references barrio(idBarrio) not null,
+idBarrio int constraint fk_BarrioEmple foreign key references barrio(idBarrio) not null,
 idEmpleado int constraint fk_empleadoDireccion foreign key references empleado(idEmpleado) not null
 );
 
 create table direccionProveedor
 (
-idDir int constraint pk_Dir primary key,
+idDir int constraint pk_DirProveedor primary key,
 Direccion nvarchar(50) not null,
-idBarrio int constraint fk_Barrio foreign key references barrio(idBarrio) not null,
+idBarrio int constraint fk_BarrioProveedor foreign key references barrio(idBarrio) not null,
 idProveedor int,
 constraint fk_proveedor foreign key(idProveedor) references proveedor(idProveedor) 
 );
-
 
 create table companiaTelefonica(
 idCom int constraint pk_Com primary key,
@@ -127,29 +130,39 @@ constraint fk_ClienteTel foreign key (idCliente) references cliente (idCliente),
 )
 
 create table telefonoEmpresa(
-idTel int constraint pk_Tel primary key,
+idTel int constraint pk_TelEmpre primary key,
 Ntel char(8) check (Ntel like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]') not null,
 idCompany int not null,
 idEmpresa int not null,
-constraint fk_Company foreign key (idCompany) references companiaTelefonica (idCom),
+constraint fk_CompanyTel foreign key (idCompany) references companiaTelefonica (idCom),
 constraint fk_EmpresaTel foreign key (idEmpresa) references empresa(idEmpresa),
 )
 
 create table telefonoEmpleado(
-idTel int constraint pk_Tel primary key,
+idTel int constraint pk_TelEmple primary key,
 Ntel char(8) check (Ntel like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]') not null,
 idCompany int not null,
 idEmpleado int not null,
-constraint fk_Company foreign key (idCompany) references companiaTelefonica (idCom),
+constraint fk_CompanyEmple foreign key (idCompany) references companiaTelefonica (idCom),
 constraint fk_EmpleadoTel foreign key (idEmpleado) references empleado (idEmpleado),
 )
 
 create table telefonoProveedor(
-idTel int constraint pk_Tel primary key,
+idTel int constraint pk_TelProveedor primary key,
 Ntel char(8) check (Ntel like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]') not null,
 idCompany int not null,
 idProveedor int not null,
-constraint fk_Company foreign key (idCompany) references companiaTelefonica (idCom),
-constraint fk_ClienteTel foreign key (idProveedor) references proveedor (idProveedor)
+constraint fk_CompanyProveedor foreign key (idCompany) references companiaTelefonica (idCom),
+constraint fk_ProveedorTel foreign key (idProveedor) references proveedor (idProveedor)
 )
+ create table bodega(
+ idBodega int identity(1,1) primary key,
+ nombreBodega nvarchar(100) not null,
+ descripcionbd nvarchar(50) not null,
+ idmun int not null,
+ telefono char(30) not null check  (telefono like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+ constraint fk_bodega_municipio foreign key (idmun) references municipio(idmun)
+ );
+ go
+
 

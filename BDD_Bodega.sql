@@ -58,6 +58,15 @@ idEmpresa int not null,
 constraint fk_idEmpresa foreign key (idEmpresa) references empresa(idEmpresa)
 )
 
+-->Se supone que cada empleado tiene asignado un rol.
+create table EmpleadoRole(
+idER int constraint pk_EmpleadoRole primary key,
+nombreRole nvarchar(80) not null,
+descripRole nvarchar(500),
+idEmpleadoRole int constraint fk_empleadoRole foreign key references empleado(idEmpleado)
+)
+
+
 create table proveedor(
 idProveedor int constraint pk_idProveedor primary key,
 nombrePro nvarchar(100) not null,
@@ -178,7 +187,9 @@ constraint pk_productoCategoria foreign key(idCategoria) references categoria(id
 create table compra(
     idCompra int identity(1,1) constraint pk_compra primary key,
     fechaCompra datetime not null,
-    totalCompra decimal(18,2) not null
+    totalCompra decimal(18,2) not null,
+	idCliente int not null,
+	constraint fk_compraCliente foreign key(idCliente) references cliente(idCliente)
 );
 
 -- Tabla detalleCompra (para detalles de los productos comprados en una compra)
@@ -188,7 +199,7 @@ create table detalleCompra(
     idProducto int,
     cantidad int not null,
     precioUnitario decimal(18,2) not null,
-    constraint fk_detalleCompraCompra foreign key(idCompra) references compra(idCompra),
+    constraint fk_detalleCompra_Compra foreign key(idCompra) references compra(idCompra),
     constraint fk_detalleCompraProducto foreign key(idProducto) references producto(idProducto)
 );
 
@@ -201,16 +212,23 @@ create table recibo(
     constraint fk_reciboCompra foreign key(idCompra) references compra(idCompra)
 );
 
+/*
+¿Imprimir el recibo?
+Crear un Join que enlace la tabla producto, compra, 
+detalleCompra y el recibo para que de la información mas
+relevante para el cliente.
+*/
+
+
 --Continuar con la logica de la Bodega acá.
  create table bodega(
  idBodega int constraint pk_Bodega primary key,
  nombreBodega nvarchar(100) not null,
  descripcion nvarchar(50) not null,
- idmun int not null,--??? What´s this??? 
- telefono char(30) not null check  (telefono like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
- constraint fk_bodega_municipio foreign key (idmun) references municipio(idmun)
+ codigoB char(12) unique not null,
+ idEmpresa int not null,
+ constraint fk_bodegaEmpresa foreign key(idEmpresa) references empresa(idEmpresa) 
  );
- go
 
 /*Crear otras tablas que maneje los siguientes puntos
 -------------------------------

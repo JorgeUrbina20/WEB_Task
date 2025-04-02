@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.cambioTexto:hover{
+    color:rgb(175, 172, 172) !important;
+}
+.imgT{
+    height: 50vh;
+    width: 50vw;
+}

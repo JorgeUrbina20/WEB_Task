@@ -150,6 +150,6 @@ Ntel char(8) check (Ntel like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]') not nu
 idCompany int not null,
 idProveedor int not null,
 constraint fk_Company foreign key (idCompany) references companiaTelefonica (idCom),
-constraint fk_ClienteTel foreign key (idProveedor) references proveedor (idProveedor)
+constraint fk_ProveedorTel foreign key (idProveedor) references proveedor (idProveedor)
 )
 

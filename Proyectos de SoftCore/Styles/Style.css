@@ -1,0 +1,39 @@
+::selection{
+    color: tomato;
+    background-color: darkblue;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Inicio de la seccion del navbar*/
+#enlaceU{
+    color:darkblue !important;
+}
+.cambioTexto{
+    font-size:1.2rem !important;
+    font-weight: bolder;
+}
+.cambioTexto:hover{
+    color:skyblue !important;
+    text-decoration: underline rgb(9, 152, 209) solid 3px;
+}
+.imgT{
+    height: 7vh;
+    width: 7vw;
+}
+/*Fin de la seccion del Navbar*/
+.containerDiv{
+    top:41vh;
+    opacity: 0.7;
+    clip-path: polygon(0 100%, 0 0,100% 0,70% 100%);
+}
+.btnB{
+    top:68vh;
+    left: 9vw;
+}
+.btnB:active{
+    transform: scale(0.9);
+}

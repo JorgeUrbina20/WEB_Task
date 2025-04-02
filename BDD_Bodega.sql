@@ -220,11 +220,11 @@ create table compra(
 	/*
 	->Posibles estado de una compra<-
 
-	Pendiente: La compra ha sido iniciada, pero aún no ha sido procesada.
-	Procesando: La compra está siendo procesada o verificada.
+	Pendiente: La compra ha sido iniciada, pero aï¿½n no ha sido procesada.
+	Procesando: La compra estï¿½ siendo procesada o verificada.
 	Completada: La compra ha sido finalizada correctamente.
-	Cancelada: La compra ha sido cancelada por el usuario o por algún error.
-	Enviado: Si es una compra que involucra envío de productos.
+	Cancelada: La compra ha sido cancelada por el usuario o por algï¿½n error.
+	Enviado: Si es una compra que involucra envï¿½o de productos.
 	Entregado: Si la compra ya ha sido entregada al cliente.
 	*/
 );
@@ -242,14 +242,14 @@ create table detalleCompra(
 	/*
 	->Posibles estado para el detalle de la compra<-
 
-	Pendiente: El artículo aún no ha sido procesado o no se ha confirmado.
-	Confirmado: El artículo ha sido confirmado y procesado, listo para ser enviado o entregado.
-	Enviado: El artículo ya ha sido enviado al cliente, si corresponde.
-	Entregado: El artículo ha sido entregado al cliente.
-	Cancelado: El artículo ha sido cancelado (por ejemplo, si hubo un error o el cliente lo cambió de opinión).
-	Devuelto: El artículo ha sido devuelto por el cliente.
-	Pendiente de stock: El artículo está fuera de inventario, esperando reposición.
-	Reembolsado: El artículo ha sido reembolsado, generalmente si el cliente ha devuelto el producto o hay una disputa.
+	Pendiente: El artï¿½culo aï¿½n no ha sido procesado o no se ha confirmado.
+	Confirmado: El artï¿½culo ha sido confirmado y procesado, listo para ser enviado o entregado.
+	Enviado: El artï¿½culo ya ha sido enviado al cliente, si corresponde.
+	Entregado: El artï¿½culo ha sido entregado al cliente.
+	Cancelado: El artï¿½culo ha sido cancelado (por ejemplo, si hubo un error o el cliente lo cambiï¿½ de opiniï¿½n).
+	Devuelto: El artï¿½culo ha sido devuelto por el cliente.
+	Pendiente de stock: El artï¿½culo estï¿½ fuera de inventario, esperando reposiciï¿½n.
+	Reembolsado: El artï¿½culo ha sido reembolsado, generalmente si el cliente ha devuelto el producto o hay una disputa.
 	*/
 );
 
@@ -264,27 +264,27 @@ create table recibo(
 	/*
 	->Posibles estados para el recibo<-
 
-	Pendiente: La compra ha sido iniciada pero aún no se ha procesado ni confirmado.
-	Procesando: La compra está siendo procesada; por ejemplo, se está verificando el pago, el stock, etc.
-	Completada: La compra ha sido completada con éxito (se ha recibido el pago y se han enviado los productos).
-	Cancelada: La compra ha sido cancelada, ya sea por el cliente o por algún error en el proceso.
+	Pendiente: La compra ha sido iniciada pero aï¿½n no se ha procesado ni confirmado.
+	Procesando: La compra estï¿½ siendo procesada; por ejemplo, se estï¿½ verificando el pago, el stock, etc.
+	Completada: La compra ha sido completada con ï¿½xito (se ha recibido el pago y se han enviado los productos).
+	Cancelada: La compra ha sido cancelada, ya sea por el cliente o por algï¿½n error en el proceso.
 	Reembolsada: La compra ha sido reembolsada total o parcialmente.
-	Pago pendiente: Se ha registrado la compra, pero el pago aún no se ha confirmado.
-	Pago rechazado: El pago ha sido rechazado (tarjeta inválida, fondos insuficientes, etc.).
-	En proceso de devolución: El recibo está en proceso de devolución, es decir, el cliente ha solicitado devolver los productos o la compra completa.
-	Fallida: La compra falló, por ejemplo, debido a problemas con la tarjeta de crédito, fraude detectado, etc.
+	Pago pendiente: Se ha registrado la compra, pero el pago aï¿½n no se ha confirmado.
+	Pago rechazado: El pago ha sido rechazado (tarjeta invï¿½lida, fondos insuficientes, etc.).
+	En proceso de devoluciï¿½n: El recibo estï¿½ en proceso de devoluciï¿½n, es decir, el cliente ha solicitado devolver los productos o la compra completa.
+	Fallida: La compra fallï¿½, por ejemplo, debido a problemas con la tarjeta de crï¿½dito, fraude detectado, etc.
 	*/
 );
 
 /*
-¿Imprimir el recibo?
+ï¿½Imprimir el recibo?
 Crear un Join que enlace la tabla producto, compra, 
-detalleCompra y el recibo para que de la información mas
+detalleCompra y el recibo para que de la informaciï¿½n mas
 relevante para el cliente.
 */
 
 
---Continuar con la logica de la Bodega acá.
+--Continuar con la logica de la Bodega acï¿½.
  create table bodega(
  idBodega int constraint pk_Bodega primary key,
  nombreBodega nvarchar(100) not null,
@@ -295,15 +295,15 @@ relevante para el cliente.
  EstadoBodega char(20) default 'Almacenado' not null
  /*
  ->Posibles estados para la bodega<-
-	Pendiente: El producto está en espera de ser recibido en la bodega (por ejemplo, aún no ha llegado a la bodega).
+	Pendiente: El producto estï¿½ en espera de ser recibido en la bodega (por ejemplo, aï¿½n no ha llegado a la bodega).
 	Recibido: El producto ha llegado a la bodega, pero no ha sido almacenado o registrado completamente.
-	Almacenado: El producto ha sido recibido y registrado correctamente en el inventario de la bodega, ya está disponible para su venta o distribución.
-	En espera de calidad: El producto ha sido recibido, pero está siendo revisado para asegurar que cumple con los estándares de calidad.
-	Devolución pendiente: El producto ha sido recibido, pero está siendo devuelto por alguna razón, ya sea por defectos o por otro error.
+	Almacenado: El producto ha sido recibido y registrado correctamente en el inventario de la bodega, ya estï¿½ disponible para su venta o distribuciï¿½n.
+	En espera de calidad: El producto ha sido recibido, pero estï¿½ siendo revisado para asegurar que cumple con los estï¿½ndares de calidad.
+	Devoluciï¿½n pendiente: El producto ha sido recibido, pero estï¿½ siendo devuelto por alguna razï¿½n, ya sea por defectos o por otro error.
 	Asignado a venta: El producto ha sido tomado del inventario para ser vendido o enviado a un cliente.
-	Enviado: El producto ha sido enviado al cliente, se ha actualizado el inventario para reflejar que ya no está disponible.
-	Descartado: El producto ha sido eliminado del inventario por alguna razón, como daño o caducidad.
-	En tránsito: El producto está en proceso de ser trasladado dentro de la bodega o entre bodegas.
+	Enviado: El producto ha sido enviado al cliente, se ha actualizado el inventario para reflejar que ya no estï¿½ disponible.
+	Descartado: El producto ha sido eliminado del inventario por alguna razï¿½n, como daï¿½o o caducidad.
+	En trï¿½nsito: El producto estï¿½ en proceso de ser trasladado dentro de la bodega o entre bodegas.
  */
  );
 
@@ -312,9 +312,9 @@ relevante para el cliente.
 -->Condiciones de la Compra:<--
 -------------------------------
 
-->Política de devolución: [Indicar condiciones, si aplica]
-->Garantía: [Información de la garantía del producto, si aplica]
-->Entrega: [Método y plazo de entrega, si aplica]
+->Polï¿½tica de devoluciï¿½n: [Indicar condiciones, si aplica]
+->Garantï¿½a: [Informaciï¿½n de la garantï¿½a del producto, si aplica]
+->Entrega: [Mï¿½todo y plazo de entrega, si aplica]
 */
 
 
